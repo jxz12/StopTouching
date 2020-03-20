@@ -1,4 +1,4 @@
-Shader "Diffuse Color"
+Shader "Skin"
 {
     Properties
     {

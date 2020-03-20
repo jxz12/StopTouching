@@ -8,12 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: face
-  m_Shader: {fileID: 4800000, guid: ca7d1f11bd319d84facb676259a7a071, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8fd98fd4fa5a3414aa8ce4b403b0706f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6fd00dcf38d44b6468db349aa8378fea, type: 3}
+        m_Texture: {fileID: 2800000, guid: 745d72b32066e824ea6faa83ed2e08f4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex2:

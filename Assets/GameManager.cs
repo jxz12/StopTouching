@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using System.Collections.Generic;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,19 +11,13 @@ public class GameManager : MonoBehaviour
     {
         mainCam = Camera.main;
     }
-    [SerializeField] GameObject handPrefab;
-
+    [SerializeField] GameObject handPrefab, saniPrefab;
     
     [Serializable] class MyFloatEvent : UnityEvent<float>{};
     [Serializable] class MyIntEvent : UnityEvent<int>{};
     [SerializeField] UnityEvent OnHeal, OnDamage;
     [SerializeField] MyFloatEvent OnEnergyUpdated;
     [SerializeField] MyIntEvent OnQuadrantQueued;
-
-    // this queue exists to make sure inputs don't get overridden by others
-    Queue<int> shotQuadrants = new Queue<int>();
-    // but only up to a certain number of queued shots
-    [SerializeField] int maxQueuedShots;
 
     float energy = 1f;
     [SerializeField] float energyPerShot, energyPerSec;
@@ -45,65 +40,79 @@ public class GameManager : MonoBehaviour
                 }
             } else {
                 if (viewportPos.y >= 1-viewportPos.x) {
-                    quadrant = 2;
-                } else {
                     quadrant = 3;
+                } else {
+                    quadrant = 2;
                 }
             }
-            print(quadrant);
-            if (shotQuadrants.Count < maxQueuedShots) {
-                shotQuadrants.Enqueue(quadrant);
-            }
+            Shoot(quadrant);
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.K))
         {
-            if (shotQuadrants.Count < maxQueuedShots) {
-                shotQuadrants.Enqueue(0);
-            }
+            Shoot(0);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.H))
         {
-            if (shotQuadrants.Count < maxQueuedShots) {
-                shotQuadrants.Enqueue(1);
-            }
+            Shoot(1);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.J))
         {
-            if (shotQuadrants.Count < maxQueuedShots) {
-                shotQuadrants.Enqueue(2);
-            }
+            Shoot(2);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.L))
         {
-            if (shotQuadrants.Count < maxQueuedShots) {
-                shotQuadrants.Enqueue(3);
-            }
+            Shoot(3);
         }
 
-        while (energy > energyPerShot)
-        {
-            Shoot(shotQuadrants.Dequeue());
-            energy -= energyPerShot;
-        }
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+
+        // }
+
         OnEnergyUpdated.Invoke(energy);
     }
     void Shoot(int quadrant)
     {
-        if (quadrant < 2)
-        {
+        if (energy < energyPerShot) {
+            return;
+        }
+
+        if (quadrant < 2) {
             Heal();
         } else { 
             Damage();
         }
+        energy -= energyPerShot;
     }
+    [SerializeField] Texture2D idle, happy, sad;
+    [SerializeField] SkinnedMeshRenderer skinnedMesh;
     void Heal()
     {
-        // TODO: change face
+        TemporarilySwapFace(happy, .85f);
         OnHeal.Invoke();
     }
     void Damage()
     {
-        // TODO: change face
+        TemporarilySwapFace(sad, .85f);
         OnDamage.Invoke();
+    }
+    IEnumerator faceSwapRoutine;
+    void TemporarilySwapFace(Texture2D tempFace, float duration)
+    {
+        if (faceSwapRoutine != null) {
+            StopCoroutine(faceSwapRoutine);
+        }
+        IEnumerator Swap()
+        {
+            float tEnd = Time.time + duration;
+            skinnedMesh.materials[1].mainTexture = tempFace;
+            while (Time.time < tEnd)
+            {
+                yield return null;
+            }
+            skinnedMesh.materials[1].mainTexture = idle;
+            faceSwapRoutine = null;
+        }
+        StartCoroutine(faceSwapRoutine = Swap());
     }
 }
