@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
+using System.Runtime.InteropServices;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -81,6 +82,12 @@ public class GameManager : MonoBehaviour
         {
             Shoot(3);
         }
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SendScore();
+        }
+#endif
         // ammo.fillAmount = lives>0? energy : 1;
         // ammoBG.color = energy>=energyPerShot? new Color(.3f,.3f,.7f) : new Color(.1f,.1f,.1f);
     }
@@ -211,20 +218,24 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(faceSwapRoutine = Swap());
     }
+    
     public void WashHands()
     {
-        Application.OpenURL("https://www.nhs.uk/live-well/healthy-body/best-way-to-wash-your-hands/");
+#if !UNITY_EDITOR
+        openWindow("https://www.nhs.uk/live-well/healthy-body/best-way-to-wash-your-hands/");
+#endif
     }
+	[DllImport("__Internal")]
+	private static extern void openWindow(string url);
+
     [SerializeField] Text leaderboard;
     [SerializeField] EcoBuilder.Postman pat;
-    static readonly string serverURL = "https://www.ecobuildergame.org/Beta/";
-    // static readonly string serverURL = "127.0.0.1/ecobuilder/";
     void SendScore()
     {
         var data = new Dictionary<string, string>() {
             { "score", score.ToString() },
             { "check", EcoBuilder.Postman.Encrypt(score.ToString()) },
-            { "__address__", serverURL+"corona.php" },
+            { "__address__", "https://www.ecobuildergame.org/Corona/corona.php" },
         };
         pat.Post(data, (b,s)=> leaderboard.text = s);
     }

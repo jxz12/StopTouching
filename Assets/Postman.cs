@@ -18,13 +18,16 @@ namespace EcoBuilder
         IEnumerator SendPost(string address, WWWForm form, Action<bool, string> ResponseCallback)
         {
             message.text = "Loading...";
+#if UNITY_EDITOR
+            yield return new WaitForSeconds(1);
+#endif
             using (var p = UnityWebRequest.Post(address, form))
             {
                 yield return p.SendWebRequest();
                 if (p.isNetworkError)
                 {
                     message.text = $"Network Error: {p.error}";
-                    ResponseCallback?.Invoke(false, p.error);
+                    ResponseCallback?.Invoke(false, message.text);
                     Hide();
                 }
                 else if (p.isHttpError) // got to server but error occurred there
@@ -41,7 +44,7 @@ namespace EcoBuilder
                     default: response = "Could not connect to server ("+p.responseCode+")"; break;
                     }
                     message.text = $"HTTP Error: {p.error}";
-                    ResponseCallback?.Invoke(false, response);
+                    ResponseCallback?.Invoke(false, message.text);
                     Hide();
                 }
                 else
@@ -72,15 +75,19 @@ namespace EcoBuilder
         
         public void Show()
         {
+            if (hideRoutine != null) {
+                StopCoroutine(hideRoutine);
+            }
             group.blocksRaycasts = true;
             group.interactable = true;
             group.alpha = 1;
         }
         [SerializeField] float fadeDuration;
+        IEnumerator hideRoutine;
         public void Hide()
         {
             group.interactable = false;
-            StartCoroutine(FadeAway(fadeDuration));
+            StartCoroutine(hideRoutine = FadeAway(fadeDuration));
         }
         IEnumerator FadeAway(float duration)
         {
@@ -98,7 +105,6 @@ namespace EcoBuilder
         //////////////////////
         // encryption stuff //
         //////////////////////
-        static readonly string publicKey = "<RSAKeyValue><Modulus>inCGRpoW93pLfg/zZRhGaKKPLb9XyDreCbNFDFC5Amsr+I4TxDnzWKwE0hWOV/1JvIh4B3qysxANVhCTYWx8UsjpwDQnvHqGfzgOnvTiHPzUDbAV1DOkweS59kAMBSVJSkvkegFk+YFsoYcUjxz8MvJpsd/mHz1iBV6HtAAjNgk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
 
         private static RSACryptoServiceProvider rsaCryptoServiceProvider;
         public static string Encrypt(string inputString)
