@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     }
     public void Begin()
     {
-        energy = 1;
+        // energy = 1;
         lives = 3;
         foreach (Image im in hearts) {
             im.color = heartCol;
@@ -36,14 +36,14 @@ public class GameManager : MonoBehaviour
     }
     [SerializeField] UnityEvent OnHeal, OnDamage, OnDead;
 
-    float energy = 0;
-    [SerializeField] float energyPerShot, energyPerSec;
+    // float energy = 0;
+    // [SerializeField] float energyPerShot, energyPerSec;
     [SerializeField] Image ammo, ammoBG;
     void Update()
     {
         // add new energy
-        energy += Time.deltaTime * energyPerSec;
-        energy = Mathf.Min(energy, 1);
+        // energy += Time.deltaTime * energyPerSec;
+        // energy = Mathf.Min(energy, 1);
 
         // find shots and queue them up
         if (Input.GetMouseButtonDown(0))
@@ -81,41 +81,36 @@ public class GameManager : MonoBehaviour
         {
             Shoot(3);
         }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Spawn();
-        }
-        ammo.fillAmount = lives>0? energy : 1;
-        ammoBG.color = energy>=energyPerShot? new Color(.3f,.3f,.7f) : new Color(.1f,.1f,.1f);
+        // ammo.fillAmount = lives>0? energy : 1;
+        // ammoBG.color = energy>=energyPerShot? new Color(.3f,.3f,.7f) : new Color(.1f,.1f,.1f);
     }
     [SerializeField] Projectile handPrefab, saniPrefab;
     Queue<Projectile>[] projectiles = new Queue<Projectile>[4] { new Queue<Projectile>(), new Queue<Projectile>(), new Queue<Projectile>(), new Queue<Projectile>() };
     int lastQuadrant = 0;
-    void Spawn()
-    {
-        bool good = UnityEngine.Random.Range(0,100) > 75;
 
-        int quadrant;
-        while ((quadrant=UnityEngine.Random.Range(0,4)) == lastQuadrant) {}
-        lastQuadrant = quadrant;
-
-        Projectile projectile;
-        projectile = Instantiate(good? saniPrefab : handPrefab);
-        projectile.Init(quadrant);
-        projectiles[quadrant].Enqueue(projectile);
-    }
-    [SerializeField] float minDelay, maxDelay;
-    [SerializeField] 
+    readonly float minDelay = .3f, maxDelay = 2f, minSpeed = 1;
     IEnumerator SpawnConstantly()
     {
-        float minDelay = energyPerShot / energyPerSec;
+        void Spawn()
+        {
+            bool good = UnityEngine.Random.Range(0,100) > 75;
+
+            int quadrant;
+            while ((quadrant=UnityEngine.Random.Range(0,4)) == lastQuadrant) {}
+            lastQuadrant = quadrant;
+
+            Projectile projectile;
+            projectile = Instantiate(good? saniPrefab : handPrefab);
+            float speed = minSpeed + Mathf.Log(1+Mathf.Sqrt(.01f*score));
+            projectile.Init(quadrant, speed);
+            projectiles[quadrant].Enqueue(projectile);
+        }
         float tNext = Time.time;
         while (true)
         {
             if (Time.time >= tNext)
             {
-                Projectile.speed = Mathf.Log(1+.1f*score) + 1;
-                float tDelay = minDelay + (maxDelay-minDelay)/(1+.01f*score);
+                float tDelay = minDelay + (maxDelay-minDelay)/(1+Mathf.Sqrt(.01f*score));
                 tNext += tDelay;
 
                 Spawn();
@@ -137,10 +132,10 @@ public class GameManager : MonoBehaviour
     }
     void Shoot(int quadrant)
     {
-        if (energy < energyPerShot) {
-            return;
-        }
-        energy -= energyPerShot;
+        // if (energy < energyPerShot) {
+        //     return;
+        // }
+        // energy -= energyPerShot;
         if (projectiles[quadrant].Count > 0)
         {
             var smacked = projectiles[quadrant].Dequeue();
@@ -171,7 +166,7 @@ public class GameManager : MonoBehaviour
     void Damage()
     {
         lives -= 1;
-        hearts[lives].color = Color.grey;
+        hearts[lives].color = new Color(1,1,1,.1f);
         if (lives > 0) {
             TemporarilySwapFace(sad, new Color(1,.4f,.4f), .85f);
             OnDamage.Invoke();
@@ -214,5 +209,21 @@ public class GameManager : MonoBehaviour
             faceSwapRoutine = null;
         }
         StartCoroutine(faceSwapRoutine = Swap());
+    }
+    public void WashHands()
+    {
+        Application.OpenURL("https://www.nhs.uk/live-well/healthy-body/best-way-to-wash-your-hands/");
+    }
+    [SerializeField] Text leaderboard;
+    [SerializeField] EcoBuilder.Postman pat;
+    static readonly string serverURL = "https://www.ecobuildergame.org/Beta/";
+    void SendScore()
+    {
+        var data = new Dictionary<string, string>() {
+            { "score", score.ToString() },
+            { "check", EcoBuilder.Postman.Encrypt(score.ToString()) },
+            { "__address__", serverURL+"corona.php" },
+        };
+        pat.Post(data, (b,s)=> leaderboard.text = s);
     }
 }

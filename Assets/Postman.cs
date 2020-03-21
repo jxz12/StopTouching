@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Assertions;
 using UnityEngine.Networking;
 using System.Security.Cryptography;
@@ -12,7 +13,7 @@ namespace EcoBuilder
     public class Postman : MonoBehaviour
     {
         [SerializeField] CanvasGroup group;
-        [SerializeField] TMPro.TextMeshProUGUI message;
+        [SerializeField] Text message;
 
         IEnumerator SendPost(string address, WWWForm form, Action<bool, string> ResponseCallback)
         {
@@ -103,7 +104,6 @@ namespace EcoBuilder
         //////////////////////
         // encryption stuff //
         //////////////////////
-        static readonly string publicKey = "<RSAKeyValue><Modulus>inCGRpoW93pLfg/zZRhGaKKPLb9XyDreCbNFDFC5Amsr+I4TxDnzWKwE0hWOV/1JvIh4B3qysxANVhCTYWx8UsjpwDQnvHqGfzgOnvTiHPzUDbAV1DOkweS59kAMBSVJSkvkegFk+YFsoYcUjxz8MvJpsd/mHz1iBV6HtAAjNgk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
 
         private static RSACryptoServiceProvider rsaCryptoServiceProvider;
         public static string Encrypt(string inputString)

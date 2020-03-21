@@ -5,8 +5,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] Rigidbody body;
     public int Quadrant { get; private set; }
-    public static float speed;
-    public void Init(int quadrant)
+    public void Init(int quadrant, float speed)
     {
         Quadrant = quadrant;
         if (Quadrant == 0)
@@ -55,21 +54,22 @@ public class Projectile : MonoBehaviour
     {
         if (Quadrant == 0)
         {
-            body.AddForce(new Vector3(5*speed,10*speed,0));
+            body.velocity = new Vector3(5,10,0);
         }
         else if (Quadrant == 1)
         {
-            body.AddForce(new Vector3(-10*speed,5*speed,0));
+            body.velocity = new Vector3(-10,5,0);
         }
         else if (Quadrant == 2)
         {
-            body.AddForce(new Vector3(-5*speed,-10*speed,0));
+            body.velocity = new Vector3(-5,-10,0);
         }
         else if (Quadrant == 3)
         {
-            body.AddForce(new Vector3(10*speed,-5*speed,0));
+            body.velocity = new Vector3(10,-5,0);
         }
-        body.AddTorque(1000 * Random.insideUnitSphere);
+
+        body.AddTorque(10000 * Random.insideUnitSphere.normalized);
 
         var effect = Instantiate(smackPrefab);
         effect.transform.position = transform.position + 2*Vector3.back;
