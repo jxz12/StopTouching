@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
 using System.Collections;
@@ -7,20 +8,29 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     Camera mainCam;
+    Color heartCol;
     void Start()
     {
         mainCam = Camera.main;
+        heartCol = hearts[0].color;
     }
-    [SerializeField] GameObject handPrefab, saniPrefab;
-    
-    [Serializable] class MyFloatEvent : UnityEvent<float>{};
-    [Serializable] class MyIntEvent : UnityEvent<int>{};
-    [SerializeField] UnityEvent OnHeal, OnDamage;
-    [SerializeField] MyFloatEvent OnEnergyUpdated;
-    [SerializeField] MyIntEvent OnQuadrantQueued;
+    public void Begin()
+    {
+        energy = 1;
+        lives = 3;
+        foreach (Image im in hearts) {
+            im.color = heartCol;
+        }
+        score = 0;
+        DisplayScore();
+        skinnedMesh.materials[1].mainTexture = idle;
+        StartCoroutine(SpawnConstantly());
+    }
+    [SerializeField] UnityEvent OnHeal, OnDamage, OnDead;
 
     float energy = 1f;
     [SerializeField] float energyPerShot, energyPerSec;
+    [SerializeField] Image ammo, ammoBG;
     void Update()
     {
         // add new energy
@@ -63,38 +73,115 @@ public class GameManager : MonoBehaviour
         {
             Shoot(3);
         }
-
-        // if (Input.GetKeyDown(KeyCode.Q))
-        // {
-
-        // }
-
-        OnEnergyUpdated.Invoke(energy);
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Spawn();
+        }
+        ammo.fillAmount = energy;
+        ammoBG.color = energy>=energyPerShot? new Color(.3f,.3f,.7f) : new Color(.1f,.1f,.1f);
+    }
+    [SerializeField] Projectile handPrefab, saniPrefab;
+    Queue<Projectile>[] projectiles = new Queue<Projectile>[4] { new Queue<Projectile>(), new Queue<Projectile>(), new Queue<Projectile>(), new Queue<Projectile>() };
+    void Spawn()
+    {
+        bool good = UnityEngine.Random.Range(0,100) > 80;
+        int quadrant = UnityEngine.Random.Range(0, 4);
+        Projectile projectile;
+        if (good)
+        {
+            projectile = Instantiate(saniPrefab);
+        }
+        else
+        {
+            projectile = Instantiate(handPrefab);
+        }
+        projectile.Init(quadrant);
+        projectiles[quadrant].Enqueue(projectile);
+    }
+    IEnumerator SpawnConstantly()
+    {
+        float maxDelay = energyPerShot / energyPerSec;
+        float tDelay = 2f;
+        float tStart = Time.time;
+        float tNext = tStart + tDelay;
+        while (true)
+        {
+            if (Time.time > tNext)
+            {
+                Spawn();
+                tNext += tDelay;
+                Projectile.speed = 1;
+            }
+            yield return null;
+        }
+    }
+    int lives = 3;
+    [SerializeField] Image[] hearts;
+    void OnTriggerEnter(Collider other)
+    {
+        string otherTag = other.tag;
+        var projectile = projectiles[other.GetComponent<Projectile>().Quadrant].Dequeue();
+        Destroy(projectile.gameObject);
+        if (otherTag == "Hand") {
+            Damage();
+        } else if (other.tag == "Sani") {
+            Heal();
+        }
     }
     void Shoot(int quadrant)
     {
         if (energy < energyPerShot) {
             return;
         }
-
-        if (quadrant < 2) {
-            Heal();
-        } else { 
-            Damage();
-        }
         energy -= energyPerShot;
+        if (projectiles[quadrant].Count > 0)
+        {
+            var shot = projectiles[quadrant].Dequeue();
+            string shotTag = shot.tag;
+            Destroy(shot.gameObject);
+            if (shotTag == "Hand") {
+                Heal();
+            } else if (shot.tag == "Sani") {
+                Damage();
+            }
+        }
     }
-    [SerializeField] Texture2D idle, happy, sad;
+    [SerializeField] Texture2D idle, happy, sad, dead;
     [SerializeField] SkinnedMeshRenderer skinnedMesh;
+    int score;
     void Heal()
     {
         TemporarilySwapFace(happy, .85f);
+        score += 10;
+        score = (int)(score * 1.5f);
+        DisplayScore();
         OnHeal.Invoke();
     }
     void Damage()
     {
-        TemporarilySwapFace(sad, .85f);
-        OnDamage.Invoke();
+        lives -= 1;
+        hearts[lives].color = Color.grey;
+        if (lives > 0) {
+            TemporarilySwapFace(sad, .85f);
+            OnDamage.Invoke();
+        }
+    }
+    [SerializeField] Text scoreText;
+    void DisplayScore()
+    {
+        scoreText.text = $"Score: {score}";
+    }
+    void GameOver()
+    {
+        StopAllCoroutines();
+        foreach (var queue in projectiles) {
+            while (queue.Count > 0) {
+                Destroy(queue.Dequeue().gameObject);
+            }
+        }
+        skinnedMesh.materials[1].mainTexture = dead;
+        skinnedMesh.materials[0].color = new Color(.1f,.5f,.2f);
+        OnDead.Invoke();
     }
     IEnumerator faceSwapRoutine;
     void TemporarilySwapFace(Texture2D tempFace, float duration)
