@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
         {
             var smacked = projectiles[quadrant].Dequeue();
             if (smacked.tag == "Hand") {
-                Heal((int)(5 * (smacked.transform.position - transform.position).magnitude));
+                Heal((long)(5 * (smacked.transform.position - transform.position).magnitude));
             } else if (smacked.tag == "Sani") {
                 Damage();
             }
@@ -156,11 +156,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Texture2D idle, happy, sad, dead;
     [SerializeField] SkinnedMeshRenderer skinnedMesh;
     [SerializeField] Effect pointsPrefab;
-    int score;
-    void Heal(int points)
+    long score;
+    void Heal(long points)
     {
-        int newScore = score + points;
-        newScore = (int)(newScore * 1.2f); // exponential growth hehe
+        long newScore = score + points;
+        newScore = (long)(newScore * 1.2f); // exponential growth hehe
         var effect = Instantiate(pointsPrefab, scoreText.rectTransform);
         effect.GetComponent<Text>().text = $"+{newScore-score}";
         score = newScore;
@@ -225,6 +225,16 @@ public class GameManager : MonoBehaviour
         var data = new Dictionary<string, string>() {
             { "score", score.ToString() },
             { "check", EcoBuilder.Postman.Encrypt(score.ToString()) },
+            { "__address__", "https://www.ecobuildergame.org/Corona/corona.php" },
+        };
+        pat.Post(data, (b,s)=> leaderboard.text = s);
+    }
+    public void RefreshLeaderboard()
+    {
+        long foo = -1;
+        var data = new Dictionary<string, string>() {
+            { "score", foo.ToString() },
+            { "check", EcoBuilder.Postman.Encrypt(foo.ToString()) },
             { "__address__", "https://www.ecobuildergame.org/Corona/corona.php" },
         };
         pat.Post(data, (b,s)=> leaderboard.text = s);
