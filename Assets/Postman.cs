@@ -18,9 +18,6 @@ namespace EcoBuilder
         IEnumerator SendPost(string address, WWWForm form, Action<bool, string> ResponseCallback)
         {
             message.text = "Loading...";
-#if UNITY_EDITOR
-            yield return new WaitForSeconds(1);
-#endif
             using (var p = UnityWebRequest.Post(address, form))
             {
                 yield return p.SendWebRequest();
@@ -53,7 +50,6 @@ namespace EcoBuilder
                     message.text = "Success!";
                     Hide();
                 }
-                print(p.error);
             }
         }
         IEnumerator postRoutine = null;
@@ -79,7 +75,6 @@ namespace EcoBuilder
             group.blocksRaycasts = true;
             group.interactable = true;
             group.alpha = 1;
-            GetComponent<Animator>().enabled = true;
         }
         [SerializeField] float fadeDuration;
         public void Hide()
@@ -98,12 +93,12 @@ namespace EcoBuilder
             }
             group.blocksRaycasts = false;
             group.alpha = 0;
-            GetComponent<Animator>().enabled = false;
         }
 
         //////////////////////
         // encryption stuff //
         //////////////////////
+        static readonly string publicKey = "<RSAKeyValue><Modulus>inCGRpoW93pLfg/zZRhGaKKPLb9XyDreCbNFDFC5Amsr+I4TxDnzWKwE0hWOV/1JvIh4B3qysxANVhCTYWx8UsjpwDQnvHqGfzgOnvTiHPzUDbAV1DOkweS59kAMBSVJSkvkegFk+YFsoYcUjxz8MvJpsd/mHz1iBV6HtAAjNgk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
 
         private static RSACryptoServiceProvider rsaCryptoServiceProvider;
         public static string Encrypt(string inputString)

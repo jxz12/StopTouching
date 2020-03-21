@@ -187,6 +187,7 @@ public class GameManager : MonoBehaviour
         skinnedMesh.materials[1].mainTexture = dead;
         skinnedMesh.materials[0].color = new Color(.1f,.5f,.2f);
         overText.text = $"Game Over!\nFinal Score: {score.ToString("N0")}";
+        SendScore();
         OnDead.Invoke();
     }
     IEnumerator faceSwapRoutine;
@@ -217,6 +218,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text leaderboard;
     [SerializeField] EcoBuilder.Postman pat;
     static readonly string serverURL = "https://www.ecobuildergame.org/Beta/";
+    // static readonly string serverURL = "127.0.0.1/ecobuilder/";
     void SendScore()
     {
         var data = new Dictionary<string, string>() {
