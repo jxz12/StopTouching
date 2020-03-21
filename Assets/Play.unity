@@ -1686,7 +1686,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1013890099}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8296172668018291195}
+        m_MethodName: WashHands
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1013890099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,10 +2211,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b0ef01df6b762674083cdc9a6f5924ce, type: 3}
-    m_FontSize: 58
+    m_FontSize: 54
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 5
     m_MaxSize: 195
     m_Alignment: 7
     m_AlignByGeometry: 0

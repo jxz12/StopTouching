@@ -219,14 +219,19 @@ public class GameManager : MonoBehaviour
         StartCoroutine(faceSwapRoutine = Swap());
     }
     
+#if !UNITY_EDITOR && UNITY_WEBGL
+    [DllImport("__Internal")]
+    private static extern void OpenNHS();
     public void WashHands()
     {
-#if !UNITY_EDITOR
-        openWindow("https://www.nhs.uk/live-well/healthy-body/best-way-to-wash-your-hands/");
-#endif
+        OpenNHS();
     }
-	[DllImport("__Internal")]
-	private static extern void openWindow(string url);
+#else
+    public void WashHands()
+    {
+        Application.OpenURL("https://www.nhs.uk/live-well/healthy-body/best-way-to-wash-your-hands/");
+    }
+#endif
 
     [SerializeField] Text leaderboard;
     [SerializeField] EcoBuilder.Postman pat;
