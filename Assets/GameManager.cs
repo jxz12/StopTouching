@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
-using System.Runtime.InteropServices;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -218,20 +217,6 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(faceSwapRoutine = Swap());
     }
-    
-#if !UNITY_EDITOR && UNITY_WEBGL
-    [DllImport("__Internal")]
-    private static extern void OpenNHS();
-    public void WashHands()
-    {
-        OpenNHS();
-    }
-#else
-    public void WashHands()
-    {
-        Application.OpenURL("https://www.nhs.uk/live-well/healthy-body/best-way-to-wash-your-hands/");
-    }
-#endif
 
     [SerializeField] Text leaderboard;
     [SerializeField] EcoBuilder.Postman pat;
