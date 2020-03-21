@@ -1,346 +1,91 @@
 fileFormatVersion: 2
-guid: f205579808b5232458fb910599d0dd5c
+guid: 1954dafb5be889646914e05c442e673f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6553975174065446875
-    second: Effect Heart_0
+      213: -6355845395473041871
+    second: poof_0
   - first:
-      213: 6167646898507576855
-    second: Effect Heart_1
+      213: 7443997423296216576
+    second: poof_1
   - first:
-      213: -8700311056065153366
-    second: Effect Heart_2
+      213: -469287168485421475
+    second: poof_2
   - first:
-      213: 2976149292983875090
-    second: Effect Heart_3
+      213: 9135262667821144887
+    second: poof_3
   - first:
-      213: 4498416631254126119
-    second: Effect Heart_4
+      213: -8341674678103502639
+    second: poof_4
   - first:
-      213: -3603100781959450625
-    second: Effect Heart_5
+      213: 7649012303377385796
+    second: poof_5
   - first:
-      213: -7312508211305020637
-    second: Effect Heart_6
+      213: 8253952554670234644
+    second: poof_6
   - first:
-      213: -6879832310617144324
-    second: Effect Heart_7
+      213: -9170536020298304023
+    second: poof_7
   - first:
-      213: 2562381612294925138
-    second: Effect Heart_8
+      213: 4567140153452601946
+    second: poof_8
   - first:
-      213: 3065853059683573585
-    second: Effect Heart_9
+      213: 7719559078813722537
+    second: poof_9
   - first:
-      213: -733685121562205270
-    second: Effect Heart_10
+      213: 7688384573670944511
+    second: poof_10
   - first:
-      213: 6108279090182229256
-    second: Effect Heart_11
+      213: -2093927311378585608
+    second: poof_11
   - first:
-      213: 1784689185001261848
-    second: Effect Heart_12
+      213: 537868763535008600
+    second: poof_12
   - first:
-      213: -1092964164552032150
-    second: Effect Heart_13
+      213: -1620791154526805935
+    second: poof_13
   - first:
-      213: 1214300341752975167
-    second: Effect Heart_14
+      213: 6645211927269921003
+    second: poof_14
   - first:
-      213: 8920240979933281844
-    second: Effect Heart_15
+      213: 8481068997428283711
+    second: poof_15
   - first:
-      213: 2595488967263145406
-    second: Effect Heart_16
+      213: -3141824856869429310
+    second: poof_16
   - first:
-      213: 3220548316543121096
-    second: Effect Heart_17
+      213: 7971780005902234379
+    second: poof_17
   - first:
-      213: 3743951802645496838
-    second: Effect Heart_18
+      213: 3029983708018550676
+    second: poof_18
   - first:
-      213: -2995575178714085889
-    second: Effect Heart_19
+      213: -4192653764971811908
+    second: poof_19
   - first:
-      213: -422816699384010343
-    second: Effect Heart_20
+      213: 8986538467740127574
+    second: poof_20
   - first:
-      213: 9216828340754985552
-    second: Effect Heart_21
+      213: 2458691781907048403
+    second: poof_21
   - first:
-      213: 4799556683250569538
-    second: Effect Heart_22
+      213: -4986630539013447286
+    second: poof_22
   - first:
-      213: -2598504590290459946
-    second: Effect Heart_23
+      213: 961041421324676272
+    second: poof_23
   - first:
-      213: 6798126241262841
-    second: Effect Heart_24
+      213: 8871198649444143885
+    second: poof_24
   - first:
-      213: 4276376703008210591
-    second: Effect Heart_25
+      213: -4611269080418172062
+    second: poof_25
   - first:
-      213: 6276314646873975496
-    second: Effect Heart_26
+      213: -4817772717368808957
+    second: poof_26
   - first:
-      213: 7625254251537508777
-    second: Effect Heart_27
-  - first:
-      213: -8412420303337386837
-    second: Effect Heart_28
-  - first:
-      213: -6726337304200573992
-    second: Effect Heart_29
-  - first:
-      213: -205270267638800340
-    second: heart_0
-  - first:
-      213: 7904136456745960365
-    second: heart_1
-  - first:
-      213: 6960772035834626590
-    second: heart_2
-  - first:
-      213: -7403393265459281337
-    second: heart_3
-  - first:
-      213: -3830260593909529575
-    second: heart_4
-  - first:
-      213: 7694531943161221939
-    second: heart_5
-  - first:
-      213: 4729818260483457387
-    second: heart_6
-  - first:
-      213: 3128560658419286586
-    second: heart_7
-  - first:
-      213: 7301465457164268856
-    second: heart_8
-  - first:
-      213: 7042384109676019114
-    second: heart_9
-  - first:
-      213: -6490385013139535653
-    second: heart_10
-  - first:
-      213: 390122160042307090
-    second: heart_11
-  - first:
-      213: -5513223382738174869
-    second: heart_12
-  - first:
-      213: -7542883581783289142
-    second: heart_13
-  - first:
-      213: -8267851290117773500
-    second: heart_14
-  - first:
-      213: 8043060671927494271
-    second: heart_15
-  - first:
-      213: -1606352187053703381
-    second: heart_16
-  - first:
-      213: 7204924603441717689
-    second: heart_17
-  - first:
-      213: -3651194002782890023
-    second: heart_18
-  - first:
-      213: 8744739626423422165
-    second: heart_19
-  - first:
-      213: 3260633064911853847
-    second: heart_20
-  - first:
-      213: -6516993328518625191
-    second: heart_21
-  - first:
-      213: -5060514311313088926
-    second: heart_22
-  - first:
-      213: 5180709076692079376
-    second: heart_23
-  - first:
-      213: -4653824408487986817
-    second: heart_24
-  - first:
-      213: 4134863632606320817
-    second: heart_25
-  - first:
-      213: 7025489124559844148
-    second: heart_26
-  - first:
-      213: -5688179294855823548
-    second: heart_27
-  - first:
-      213: 7132918619842189672
-    second: heart_28
-  - first:
-      213: -7806173982960874914
-    second: heart_29
-  - first:
-      213: -1103692299330722098
-    second: heart_30
-  - first:
-      213: 5517090352272671989
-    second: heart_31
-  - first:
-      213: 419486564666525888
-    second: heart_32
-  - first:
-      213: 5896768173102871211
-    second: heart_33
-  - first:
-      213: -2551158001256879802
-    second: heart_34
-  - first:
-      213: -4354754414021007356
-    second: heart_35
-  - first:
-      213: 9081377948988348108
-    second: heart_36
-  - first:
-      213: 530490530393716509
-    second: heart_37
-  - first:
-      213: -4176575601443785204
-    second: heart_38
-  - first:
-      213: -2660136556147557690
-    second: heart_39
-  - first:
-      213: 3618255311333463557
-    second: heart_40
-  - first:
-      213: -684472116034433351
-    second: heart_41
-  - first:
-      213: 2904559150250263536
-    second: heart_42
-  - first:
-      213: 8321528942670034232
-    second: heart_43
-  - first:
-      213: 2638654708046359580
-    second: heart_44
-  - first:
-      213: -4317986999836105036
-    second: heart_45
-  - first:
-      213: -2103390736868195709
-    second: heart_46
-  - first:
-      213: -4136813706753949729
-    second: heart_47
-  - first:
-      213: -1884934861962766820
-    second: heart_48
-  - first:
-      213: 5500714962994469239
-    second: heart_49
-  - first:
-      213: 3679739435724603719
-    second: heart_50
-  - first:
-      213: 6999872673527536379
-    second: heart_51
-  - first:
-      213: -1933224982772034098
-    second: heart_52
-  - first:
-      213: -8029529373824410378
-    second: heart_0
-  - first:
-      213: 1897638985303632447
-    second: heart_1
-  - first:
-      213: 2896562681073355615
-    second: heart_2
-  - first:
-      213: 95611298975724536
-    second: heart_3
-  - first:
-      213: -2153547667446634496
-    second: heart_4
-  - first:
-      213: -2496965285507181592
-    second: heart_5
-  - first:
-      213: -1630153393128807278
-    second: heart_6
-  - first:
-      213: -117789992886593470
-    second: heart_7
-  - first:
-      213: 6832761713254888345
-    second: heart_8
-  - first:
-      213: 5242875725523402790
-    second: heart_9
-  - first:
-      213: -5472161885372694838
-    second: heart_10
-  - first:
-      213: 5652993667571589389
-    second: heart_11
-  - first:
-      213: 2904241931360157733
-    second: heart_12
-  - first:
-      213: 5540283765009287386
-    second: heart_13
-  - first:
-      213: 8477449855491246618
-    second: heart_14
-  - first:
-      213: 2604236579753223901
-    second: heart_15
-  - first:
-      213: 6887444288564567
-    second: heart_16
-  - first:
-      213: -3799179670467296837
-    second: heart_17
-  - first:
-      213: 7075911860085083002
-    second: heart_18
-  - first:
-      213: 5252259713228108248
-    second: heart_19
-  - first:
-      213: -6251924960693985765
-    second: heart_20
-  - first:
-      213: 8023896045722004343
-    second: heart_21
-  - first:
-      213: 4326088981183368973
-    second: heart_22
-  - first:
-      213: 4785073757315671710
-    second: heart_23
-  - first:
-      213: 1583153671360773826
-    second: heart_24
-  - first:
-      213: 7019298603319654086
-    second: heart_25
-  - first:
-      213: -8640771692243155850
-    second: heart_26
-  - first:
-      213: 3292914372320320074
-    second: heart_27
-  - first:
-      213: 8369083574851979897
-    second: heart_28
-  - first:
-      213: 5816683252429356980
-    second: heart_29
+      213: -7578517808605993164
+    second: poof_27
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -450,49 +195,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: heart_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6fc91a7a391619090800000000000000
-      internalID: -8029529373824410378
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: heart_1
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f3aa4fe5a94c55a10800000000000000
-      internalID: 1897638985303632447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: heart_2
+      name: poof_0
       rect:
         serializedVersion: 2
         x: 512
@@ -506,14 +209,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5bc70b6968a23820800000000000000
-      internalID: 2896562681073355615
+      spriteID: 136f68b99408bc7a0800000000000000
+      internalID: -6355845395473041871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_3
+      name: poof_1
       rect:
         serializedVersion: 2
         x: 768
@@ -527,14 +230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f336f748fda35100800000000000000
-      internalID: 95611298975724536
+      spriteID: 00e7e7c67346e4760800000000000000
+      internalID: 7443997423296216576
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_4
+      name: poof_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -548,14 +251,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 008e8f27ecf0d12e0800000000000000
-      internalID: -2153547667446634496
+      spriteID: d5e07c08ec1cc79f0800000000000000
+      internalID: -469287168485421475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_5
+      name: poof_3
       rect:
         serializedVersion: 2
         x: 1280
@@ -569,14 +272,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e3dcd46d4ff85dd0800000000000000
-      internalID: -2496965285507181592
+      spriteID: 73bdd55eef8f6ce70800000000000000
+      internalID: 9135262667821144887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_6
+      name: poof_4
       rect:
         serializedVersion: 2
         x: 0
@@ -590,14 +293,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 294e82930288069e0800000000000000
-      internalID: -1630153393128807278
+      spriteID: 1d015cb831b6c3c80800000000000000
+      internalID: -8341674678103502639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_7
+      name: poof_5
       rect:
         serializedVersion: 2
         x: 256
@@ -611,14 +314,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24816e320a68d5ef0800000000000000
-      internalID: -117789992886593470
+      spriteID: 449c669e920c62a60800000000000000
+      internalID: 7649012303377385796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_8
+      name: poof_6
       rect:
         serializedVersion: 2
         x: 512
@@ -632,14 +335,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9937271a398d2de50800000000000000
-      internalID: 6832761713254888345
+      spriteID: 41c1c0efd1eeb8270800000000000000
+      internalID: 8253952554670234644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_9
+      name: poof_7
       rect:
         serializedVersion: 2
         x: 768
@@ -653,14 +356,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6204755c1bf62c840800000000000000
-      internalID: 5242875725523402790
+      spriteID: 9e5f13eb316bbb080800000000000000
+      internalID: -9170536020298304023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_10
+      name: poof_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -674,14 +377,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acebdec02c9fe04b0800000000000000
-      internalID: -5472161885372694838
+      spriteID: a5227f595cdb16f30800000000000000
+      internalID: 4567140153452601946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_11
+      name: poof_9
       rect:
         serializedVersion: 2
         x: 1280
@@ -695,14 +398,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0123213ac7737e40800000000000000
-      internalID: 5652993667571589389
+      spriteID: 9a7655b0512612b60800000000000000
+      internalID: 7719559078813722537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_12
+      name: poof_10
       rect:
         serializedVersion: 2
         x: 0
@@ -716,14 +419,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 520448436a0fd4820800000000000000
-      internalID: 2904241931360157733
+      spriteID: ffeef32f801a2ba60800000000000000
+      internalID: 7688384573670944511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_13
+      name: poof_11
       rect:
         serializedVersion: 2
         x: 256
@@ -737,14 +440,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad80e380bba03ec40800000000000000
-      internalID: 5540283765009287386
+      spriteID: 8f76ac35430e0f2e0800000000000000
+      internalID: -2093927311378585608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_14
+      name: poof_12
       rect:
         serializedVersion: 2
         x: 512
@@ -758,14 +461,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1a0eb56ab3f5a570800000000000000
-      internalID: 8477449855491246618
+      spriteID: 853684a6ac4e67700800000000000000
+      internalID: 537868763535008600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_15
+      name: poof_13
       rect:
         serializedVersion: 2
         x: 768
@@ -779,14 +482,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd6e4471f5b142420800000000000000
-      internalID: 2604236579753223901
+      spriteID: 150a553480bc189e0800000000000000
+      internalID: -1620791154526805935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_16
+      name: poof_14
       rect:
         serializedVersion: 2
         x: 1024
@@ -800,14 +503,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75dea361818781000800000000000000
-      internalID: 6887444288564567
+      spriteID: be0dc1e3a09883c50800000000000000
+      internalID: 6645211927269921003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_17
+      name: poof_15
       rect:
         serializedVersion: 2
         x: 1280
@@ -821,14 +524,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb149e7f73a964bc0800000000000000
-      internalID: -3799179670467296837
+      spriteID: f398a4b815fc2b570800000000000000
+      internalID: 8481068997428283711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_18
+      name: poof_16
       rect:
         serializedVersion: 2
         x: 0
@@ -842,14 +545,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7b4852d850b23260800000000000000
-      internalID: 7075911860085083002
+      spriteID: 2cf1ec350fef564d0800000000000000
+      internalID: -3141824856869429310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_19
+      name: poof_17
       rect:
         serializedVersion: 2
         x: 256
@@ -863,14 +566,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d17e0ba166c3e840800000000000000
-      internalID: 5252259713228108248
+      spriteID: b033d57dda371ae60800000000000000
+      internalID: 7971780005902234379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_20
+      name: poof_18
       rect:
         serializedVersion: 2
         x: 512
@@ -884,14 +587,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1edf635f53bc39a0800000000000000
-      internalID: -6251924960693985765
+      spriteID: 497aaaff02aac0a20800000000000000
+      internalID: 3029983708018550676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_21
+      name: poof_19
       rect:
         serializedVersion: 2
         x: 768
@@ -905,14 +608,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77bebefe0fa9a5f60800000000000000
-      internalID: 8023896045722004343
+      spriteID: cbba6a84d93b0d5c0800000000000000
+      internalID: -4192653764971811908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_22
+      name: poof_20
       rect:
         serializedVersion: 2
         x: 1024
@@ -926,14 +629,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0f8a2ef10b590c30800000000000000
-      internalID: 4326088981183368973
+      spriteID: 651980aaf1996bc70800000000000000
+      internalID: 8986538467740127574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_23
+      name: poof_21
       rect:
         serializedVersion: 2
         x: 1280
@@ -947,14 +650,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9628d8da3ff76240800000000000000
-      internalID: 4785073757315671710
+      spriteID: 3d7edb026270f1220800000000000000
+      internalID: 2458691781907048403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_24
+      name: poof_22
       rect:
         serializedVersion: 2
         x: 0
@@ -968,14 +671,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ce705e40ed78f510800000000000000
-      internalID: 1583153671360773826
+      spriteID: a812dffe1fdebcab0800000000000000
+      internalID: -4986630539013447286
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_25
+      name: poof_23
       rect:
         serializedVersion: 2
         x: 256
@@ -989,14 +692,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c6734fc3ee896160800000000000000
-      internalID: 7019298603319654086
+      spriteID: 0bc6e74b41e465d00800000000000000
+      internalID: 961041421324676272
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_26
+      name: poof_24
       rect:
         serializedVersion: 2
         x: 512
@@ -1010,14 +713,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 674889a3defc51880800000000000000
-      internalID: -8640771692243155850
+      spriteID: d031b088b24dc1b70800000000000000
+      internalID: 8871198649444143885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_27
+      name: poof_25
       rect:
         serializedVersion: 2
         x: 768
@@ -1031,14 +734,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4a5eedcc28c2bd20800000000000000
-      internalID: 3292914372320320074
+      spriteID: 263cee1f33b7100c0800000000000000
+      internalID: -4611269080418172062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_28
+      name: poof_26
       rect:
         serializedVersion: 2
         x: 1024
@@ -1052,14 +755,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97acb968b25f42470800000000000000
-      internalID: 8369083574851979897
+      spriteID: 30ae9ac3d35d32db0800000000000000
+      internalID: -4817772717368808957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: heart_29
+      name: poof_27
       rect:
         serializedVersion: 2
         x: 1280
@@ -1073,8 +776,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bff308999209b050800000000000000
-      internalID: 5816683252429356980
+      spriteID: 437611ea432b3d690800000000000000
+      internalID: -7578517808605993164
       vertices: []
       indices: 
       edges: []
@@ -1082,7 +785,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b122378becaa7bb4a820d21fcc7fd90a
+    spriteID: 324dbc9e88ab5914d8495b5b1da7e29b
     internalID: 0
     vertices: []
     indices: 

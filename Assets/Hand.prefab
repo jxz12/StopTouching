@@ -129,6 +129,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 5581342854612615595}
   meshRenderer: {fileID: 3651482357317104897}
+  smackPrefab: {fileID: 6345659256530077339, guid: 9f3b0946fef46864e8f6ba6181c33627,
+    type: 3}
+  touchPrefab: {fileID: 4006899475486102011, guid: d960baf3ca1635e449b2656ce43c9f09,
+    type: 3}
 --- !u!54 &5581342854612615595
 Rigidbody:
   m_ObjectHideFlags: 0
