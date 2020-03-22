@@ -5,37 +5,53 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] Rigidbody body;
     public int Quadrant { get; private set; }
-    public void Init(int quadrant, float speed)
+    public void InitSides(int quadrant, float speed, Camera cam)
     {
         Quadrant = quadrant;
+        float z = -cam.transform.position.z;
         if (Quadrant == 0)
         {
-            transform.position = new Vector3(0,4,0);
-            transform.rotation = Quaternion.Euler(0,180,180);
-            body.velocity = new Vector3(0,-speed,0);
-            body.AddTorque(new Vector3(0,Random.Range(0,100),0));
+            transform.position = cam.ViewportToWorldPoint(new Vector3(.5f,1.1f,z));
         }
         else if (Quadrant == 1)
         {
-            transform.position = new Vector3(-4,0,0);
-            transform.rotation = Quaternion.Euler(0,180,90);
-            body.velocity = new Vector3(speed,0,0);
-            body.AddTorque(new Vector3(Random.Range(0,100),0,0));
+            transform.position = cam.ViewportToWorldPoint(new Vector3(-.1f,.5f,z));
         }
         else if (Quadrant == 2)
         {
-            transform.position = new Vector3(0,-4,0);
-            transform.rotation = Quaternion.Euler(0,180,0);
-            body.velocity = new Vector3(0,speed,0);
-            body.AddTorque(new Vector3(0,Random.Range(0,100),0));
+            transform.position = cam.ViewportToWorldPoint(new Vector3(.5f,-.1f,z));
         }
         else if (Quadrant == 3)
         {
-            transform.position = new Vector3(4,0,0);
-            transform.rotation = Quaternion.Euler(0,180,270);
-            body.velocity = new Vector3(-speed,0,0);
-            body.AddTorque(new Vector3(Random.Range(0,100),0,0));
+            transform.position = cam.ViewportToWorldPoint(new Vector3(1.1f,.5f,z));
         }
+        transform.rotation = Quaternion.Euler(0,0,Vector3.SignedAngle(transform.position, Vector3.down, Vector3.back));
+        body.velocity = -transform.position.normalized * speed;
+        body.AddTorque(Random.Range(0,100) * -transform.position.normalized);
+    }
+    public void InitCorners(int quadrant, float speed, Camera cam)
+    {
+        Quadrant = quadrant;
+        float z = -cam.transform.position.z;
+        if (Quadrant == 0)
+        {
+            transform.position = cam.ViewportToWorldPoint(new Vector3(1.1f,1.1f,z));
+        }
+        else if (Quadrant == 1)
+        {
+            transform.position = cam.ViewportToWorldPoint(new Vector3(-.1f,1.1f,z));
+        }
+        else if (Quadrant == 2)
+        {
+            transform.position = cam.ViewportToWorldPoint(new Vector3(-.1f,-.1f,z));
+        }
+        else if (Quadrant == 3)
+        {
+            transform.position = cam.ViewportToWorldPoint(new Vector3(1.1f,-.1f,z));
+        }
+        transform.rotation = Quaternion.Euler(0,0,Vector3.SignedAngle(transform.position, Vector3.down, Vector3.back));
+        body.velocity = -transform.position.normalized * speed;
+        body.AddTorque(Random.Range(0,100) * -transform.position.normalized);
     }
     [SerializeField] MeshRenderer meshRenderer;
     void OnTriggerEnter(Collider other)

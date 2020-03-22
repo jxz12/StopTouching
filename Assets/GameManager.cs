@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -17,7 +16,6 @@ public class GameManager : MonoBehaviour
     }
     public void Begin()
     {
-        // energy = 1;
         lives = 3;
         foreach (Image im in hearts) {
             im.color = heartCol;
@@ -36,16 +34,20 @@ public class GameManager : MonoBehaviour
     }
     [SerializeField] UnityEvent OnHeal, OnDamage, OnDead;
 
-    // float energy = 0;
-    // [SerializeField] float energyPerShot, energyPerSec;
     [SerializeField] Image ammo, ammoBG;
     void Update()
     {
-        // add new energy
-        // energy += Time.deltaTime * energyPerSec;
-        // energy = Mathf.Min(energy, 1);
-
-        // find shots and queue them up
+        // ShootSides();
+        ShootCorners();
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SendScore();
+        }
+#endif
+    }
+    void ShootSides()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 viewportPos = mainCam.ScreenToViewportPoint(Input.mousePosition);
@@ -81,14 +83,39 @@ public class GameManager : MonoBehaviour
         {
             Shoot(3);
         }
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Q))
+    }
+    void ShootCorners()
+    {
+        int Corner(Vector2 viewportPos)
         {
-            SendScore();
+            int quadrant;
+            if (viewportPos.x >= .5f) {
+                if (viewportPos.y >= .5f) {
+                    quadrant = 0;
+                } else {
+                    quadrant = 3;
+                }
+            } else {
+                if (viewportPos.y >= .5f) {
+                    quadrant = 1;
+                } else {
+                    quadrant = 2;
+                }
+            }
+            return quadrant;
         }
-#endif
-        // ammo.fillAmount = lives>0? energy : 1;
-        // ammoBG.color = energy>=energyPerShot? new Color(.3f,.3f,.7f) : new Color(.1f,.1f,.1f);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot(Corner(mainCam.ScreenToViewportPoint(Input.mousePosition)));
+        }
+        // get touches if needed
+        foreach (var touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+                Shoot(Corner(mainCam.ScreenToViewportPoint(touch.position)));
+            }
+        }
     }
     [SerializeField] Projectile handPrefab, saniPrefab;
     Queue<Projectile>[] projectiles = new Queue<Projectile>[4] { new Queue<Projectile>(), new Queue<Projectile>(), new Queue<Projectile>(), new Queue<Projectile>() };
@@ -108,7 +135,10 @@ public class GameManager : MonoBehaviour
             Projectile projectile;
             projectile = Instantiate(good? saniPrefab : handPrefab);
             float speed = minSpeed + Mathf.Log(1+Mathf.Sqrt(.01f*score));
-            projectile.Init(quadrant, speed);
+
+            // projectile.InitSides(quadrant, speed, mainCam);
+            projectile.InitCorners(quadrant, speed, mainCam);
+
             projectiles[quadrant].Enqueue(projectile);
         }
         float tNext = Time.time;
@@ -138,10 +168,6 @@ public class GameManager : MonoBehaviour
     }
     void Shoot(int quadrant)
     {
-        // if (energy < energyPerShot) {
-        //     return;
-        // }
-        // energy -= energyPerShot;
         if (projectiles[quadrant].Count > 0)
         {
             var smacked = projectiles[quadrant].Dequeue();
@@ -173,6 +199,9 @@ public class GameManager : MonoBehaviour
     {
         lives -= 1;
         hearts[lives].color = new Color(1,1,1,.1f);
+#if UNITY_EDITOR
+        lives += 1;
+#endif
         if (lives > 0) {
             TemporarilySwapFace(sad, new Color(1,.4f,.4f), .85f);
             OnDamage.Invoke();
