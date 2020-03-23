@@ -105,6 +105,7 @@ namespace EcoBuilder
         //////////////////////
         // encryption stuff //
         //////////////////////
+        static readonly string publicKey = "<RSAKeyValue><Modulus>gM7LhAyunbWfGpKUqFdn9dUY4ootVXt2mCrBGoLDMwlmPkTIJqSsGmA5T+b29D+m2gR5h3ny5lbR5Zyu7jF79tGs6vdPX+NAkaEZFCWW+Nued8hSBLkyfgQ4XsQcEN9pBEzFuaxIX4YC1w6GV/uvDgIfQzDD5SueSPLHiL3oMC8=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
 
         private static RSACryptoServiceProvider rsaCryptoServiceProvider;
         public static string Encrypt(string inputString)
