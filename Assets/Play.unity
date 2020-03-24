@@ -3469,7 +3469,7 @@ MonoBehaviour:
   cornersText: {fileID: 1909293690}
   sideArrows: {fileID: 1573629382}
   quitButton: {fileID: 2013452004}
-  useSides: 1
+  useSides: 0
   scoreText: {fileID: 1310635514}
   OnHeal:
     m_PersistentCalls:
