@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,12 +9,36 @@ public class GameManager : MonoBehaviour
 {
     Camera mainCam;
     Color heartCol, skinCol;
+    [SerializeField] Text sidesText, cornersText;
+    [SerializeField] GameObject sideArrows, quitButton;
+    [SerializeField] bool useSides;
     void Awake()
     {
         mainCam = Camera.main;
         heartCol = hearts[0].color;
         skinCol = skinnedMesh.materials[0].color;
+
+        sidesText.enabled = useSides;
+        cornersText.enabled = !useSides;
+        sideArrows.SetActive(useSides);
+        RectTransform heaRTs = hearts[0].transform.parent.GetComponent<RectTransform>();
+        if (useSides)
+        {
+            mainCam.fieldOfView = 40;
+            heaRTs.anchorMin = heaRTs.anchorMax = new Vector2(0,0);
+            heaRTs.pivot = new Vector2(0,0);
+        }
+        else
+        {
+            mainCam.fieldOfView = 25;
+            heaRTs.anchorMin = heaRTs.anchorMax = new Vector2(.5f,0);
+            heaRTs.pivot = new Vector2(.5f,0);
+        }
+#if UNITY_WEBGL
+        quitButton.SetActive(false);
+#endif
     }
+    readonly float minDelay = .3f, maxDelay = 2f, minSpeed = 1;
     public void Begin()
     {
         lives = 3;
@@ -25,20 +50,43 @@ public class GameManager : MonoBehaviour
 
         score = 0;
         DisplayScore();
-        StartCoroutine(SpawnConstantly());
+        // if (mode == Difficulty.Easy) {
+        //     StartCoroutine(SpawnConstantly(()=>minSpeed + Mathf.Log(1+.01f*Time.time),
+        //                                    ()=>minDelay + (maxDelay-minDelay)/(1+.01f*Time.time)));
+        // } else if (mode == Difficulty.Hard) {
+            StartCoroutine(SpawnConstantly(()=>minSpeed + (float)Math.Log(1+Math.Sqrt(.01*score)),
+                                           ()=>minDelay + (maxDelay-minDelay)/(1+(float)Math.Sqrt(.01f*score))));
+        // }
+        OnBegin.Invoke();
+    }
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
     [SerializeField] Text scoreText;
     void DisplayScore()
     {
         scoreText.text = $"Score: {score.ToString("N0")}";
     }
-    [SerializeField] UnityEvent OnHeal, OnDamage, OnDead;
+    [SerializeField] UnityEvent OnHeal, OnDamage, OnDead, OnBegin;
 
-    [SerializeField] Image ammo, ammoBG;
     void Update()
     {
-        // ShootSides();
-        ShootCorners();
+        if (useSides) {
+            ShootSides();
+        } else {
+            ShootCorners();
+        }
+
+        if (lives == 0 && Input.GetKeyDown(KeyCode.Space))
+        {
+            Begin();
+        }
+
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -121,8 +169,7 @@ public class GameManager : MonoBehaviour
     Queue<Projectile>[] projectiles = new Queue<Projectile>[4] { new Queue<Projectile>(), new Queue<Projectile>(), new Queue<Projectile>(), new Queue<Projectile>() };
     int lastQuadrant = 0;
 
-    readonly float minDelay = .3f, maxDelay = 2f, minSpeed = 1;
-    IEnumerator SpawnConstantly()
+    IEnumerator SpawnConstantly(Func<float> Speed, Func<float> Delay)
     {
         void Spawn()
         {
@@ -134,19 +181,21 @@ public class GameManager : MonoBehaviour
 
             Projectile projectile;
             projectile = Instantiate(good? saniPrefab : handPrefab);
-            float speed = minSpeed + Mathf.Log(1+Mathf.Sqrt(.01f*score));
+            float speed = Speed();
 
-            // projectile.InitSides(quadrant, speed, mainCam);
-            projectile.InitCorners(quadrant, speed, mainCam);
-
+            if (useSides) {
+                projectile.InitSides(quadrant, speed, mainCam);
+            } else {
+                projectile.InitCorners(quadrant, speed, mainCam);
+            }
             projectiles[quadrant].Enqueue(projectile);
         }
-        float tNext = Time.time;
+        float tNext = Time.time + 1;
         while (true)
         {
             if (Time.time >= tNext)
             {
-                float tDelay = minDelay + (maxDelay-minDelay)/(1+Mathf.Sqrt(.01f*score));
+                float tDelay = Delay();
                 tNext += tDelay;
 
                 Spawn();
@@ -172,7 +221,10 @@ public class GameManager : MonoBehaviour
         {
             var smacked = projectiles[quadrant].Dequeue();
             if (smacked.tag == "Hand") {
-                Heal((long)(5 * (smacked.transform.position - transform.position).magnitude));
+                // Heal((long)(5 * (smacked.transform.position - transform.position).magnitude));
+                var viewportPos = (Vector2)mainCam.WorldToViewportPoint(smacked.transform.position);
+                viewportPos -= new Vector2(.5f,.5f);
+                Heal((long)(30 * (viewportPos).magnitude));
             } else if (smacked.tag == "Sani") {
                 Damage();
             }
@@ -199,9 +251,6 @@ public class GameManager : MonoBehaviour
     {
         lives -= 1;
         hearts[lives].color = new Color(1,1,1,.1f);
-#if UNITY_EDITOR
-        lives += 1;
-#endif
         if (lives > 0) {
             TemporarilySwapFace(sad, new Color(1,.4f,.4f), .85f);
             OnDamage.Invoke();
@@ -224,6 +273,7 @@ public class GameManager : MonoBehaviour
         overText.text = $"Game Over!\nFinal Score: {score.ToString("N0")}";
         SendScore();
         OnDead.Invoke();
+        print("hello");
     }
     IEnumerator faceSwapRoutine;
     void TemporarilySwapFace(Texture2D tempFace, Color tempCol, float duration)
@@ -249,12 +299,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Text leaderboard;
     [SerializeField] EcoBuilder.Postman pat;
+#if !UNITY_EDITOR
+    static readonly string address = "https://www.ecobuildergame.org/Corona/corona.php";
+#else
+    static readonly string address = "127.0.0.1/corona/corona.php";
+#endif
     void SendScore()
     {
         var data = new Dictionary<string, string>() {
             { "score", score.ToString() },
             { "check", EcoBuilder.Postman.Encrypt(score.ToString()) },
-            { "__address__", "https://www.ecobuildergame.org/Corona/corona.php" },
+            { "__address__", address },
         };
         pat.Post(data, (b,s)=> leaderboard.text = s);
     }
@@ -264,7 +319,7 @@ public class GameManager : MonoBehaviour
         var data = new Dictionary<string, string>() {
             { "score", foo.ToString() },
             { "check", EcoBuilder.Postman.Encrypt(foo.ToString()) },
-            { "__address__", "https://www.ecobuildergame.org/Corona/corona.php" },
+            { "__address__", address },
         };
         pat.Post(data, (b,s)=> leaderboard.text = s);
     }
