@@ -1,4 +1,4 @@
 # Stop Touching Your Face!
-This is how I spent my time in self-isolation ;). Hosted online by Github pages at [jxz12.github.io/StopTouching](https://jxz12.github.io/StopTouching)
+This is how I spent my time in self-isolation ;). Downloadable on Android devices from the [Google Play store](https://play.google.com/store/apps/details?id=com.JZ.StopTouchingYourFace), and hosted online by Github pages at [jxz12.github.io/StopTouching](https://jxz12.github.io/StopTouching).
 
 ![image](boris.png)
