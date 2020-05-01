@@ -273,7 +273,6 @@ public class GameManager : MonoBehaviour
         overText.text = $"Game Over!\nFinal Score: {score.ToString("N0")}";
         SendScore();
         OnDead.Invoke();
-        print("hello");
     }
     IEnumerator faceSwapRoutine;
     void TemporarilySwapFace(Texture2D tempFace, Color tempCol, float duration)

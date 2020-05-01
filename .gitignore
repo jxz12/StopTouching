@@ -15,6 +15,7 @@ TextMesh\ Pro.meta
 *.blend1
 *.apk
 *.keystore
+/Build/
  
 # ============================================= #
 # Visual Studio / MonoDevelop / Rider generated #
